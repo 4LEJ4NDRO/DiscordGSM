@@ -45,7 +45,7 @@ FIELD_COUNTRY = os.getenv("FIELD_COUNTRY", SETTINGS["fieldname"]["country"])
 class DiscordGSM():
     def __init__(self, bot):
         print('\n----------------')
-        print('Github: \thttps://github.com/DiscordGSM/DiscordGSM')
+        print('Github: \thttps://github.com/4LEJ4NDRO/DiscordGSM')
         print('Discord:\thttps://discord.gg/Cg4Au9T')
         print('----------------\n')
 
@@ -66,9 +66,9 @@ class DiscordGSM():
 
     async def on_ready(self):
         # set username and avatar
-        with open('images/discordgsm.png', 'rb') as file:
+        with open('images/tracker.png', 'rb') as file:
             try:
-                await bot.user.edit(username='DiscordGSM', avatar=file.read())
+                await bot.user.edit(username='TRACKER', avatar=file.read())
             except:
                 pass
 
@@ -218,7 +218,7 @@ class DiscordGSM():
             else:
                 color = discord.Color.from_rgb(32, 34, 37) # dark
 
-            title = (data['password'] and ':lock: ' or '') + f'`{data["name"]}`'
+            title = (data['password'] and ':lock: ' or '') + data["name"]
             custom = ('custom' in server) and server['custom'] or None
             if custom and custom.strip():
                 embed = discord.Embed(title=title, description=custom, color=color)
@@ -248,7 +248,7 @@ class DiscordGSM():
                 image_url = str(server['image_url'])
             else:
                 image_url = (CUSTOM_IMAGE_URL and CUSTOM_IMAGE_URL.strip()) and CUSTOM_IMAGE_URL or f'https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/{urllib.parse.quote(data["game"])}'
-                image_url += f'/{urllib.parse.quote(data["map"])}.jpg'
+                image_url += f'{urllib.parse.quote(data["map"])}.jpg'
 
             embed.set_thumbnail(url=image_url)
         else:
@@ -257,7 +257,7 @@ class DiscordGSM():
             embed = discord.Embed(title='ERROR', description=f'{FIELD_STATUS}: :warning: **Fail to query**', color=color)
             embed.add_field(name=f'{FIELD_ADDRESS}:{FIELD_PORT}', value=f'{server["addr"]}:{server["port"]}', inline=True)
         
-        embed.set_footer(text=f'DiscordGSM v{VERSION} | Game Server Monitor | Last update: ' + datetime.now().strftime('%a, %Y-%m-%d %I:%M:%S%p'), icon_url='https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/discordgsm.png')
+        embed.set_footer(text=f'Game Server Monitor | Last update: ' + datetime.now().strftime('%a, %Y-%m-%d %I:%M:%S%p'), icon_url='https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/tracker-512.png')
         
         return embed
 
@@ -272,7 +272,7 @@ bot = commands.Bot(command_prefix=DGSM_PREFIX)
 @commands.check_any(commands.has_role(ROLE_ID), commands.is_owner())
 async def _dgsm(ctx):
     title = f'Command: {DGSM_PREFIX}dgsm'
-    description = f'Thanks for using Discord Game Server Monitor ([DiscordGSM](https://github.com/DiscordGSM/DiscordGSM))\n'
+    description = f'Thanks for using Discord Game Server Monitor ([DiscordGSM](https://github.com/4LEJ4NDRO/DiscordGSM))\n'
     description += f'\nUseful commands:\n{DGSM_PREFIX}servers - Display the server list'
     description += f'\n{DGSM_PREFIX}serversrefresh - Refresh the server list'
     description += f'\n{DGSM_PREFIX}getserversjson - get servers.json file'
@@ -280,7 +280,7 @@ async def _dgsm(ctx):
     color = discord.Color.from_rgb(114, 137, 218) # discord theme color
     embed = discord.Embed(title=title, description=description, color=color)
     embed.add_field(name='Support server', value='https://discord.gg/Cg4Au9T', inline=True)
-    embed.add_field(name='Github', value='https://github.com/DiscordGSM/DiscordGSM', inline=True)
+    embed.add_field(name='Github', value='https://github.com/4LEJ4NDRO/DiscordGSM', inline=True)
     await ctx.send(embed=embed)
 
 # command: serversrefresh
