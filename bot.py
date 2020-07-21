@@ -247,7 +247,7 @@ class DiscordGSM():
             if 'image_url' in server:
                 image_url = str(server['image_url'])
             else:
-                image_url = (CUSTOM_IMAGE_URL and CUSTOM_IMAGE_URL.strip()) and CUSTOM_IMAGE_URL or f'https://github.com/DiscordGSM/Map-Thumbnails/raw/master/{urllib.parse.quote(data["game"])}'
+                image_url = (CUSTOM_IMAGE_URL and CUSTOM_IMAGE_URL.strip()) and CUSTOM_IMAGE_URL or f'https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/{urllib.parse.quote(data["game"])}'
                 image_url += f'/{urllib.parse.quote(data["map"])}.jpg'
 
             embed.set_thumbnail(url=image_url)
@@ -257,7 +257,7 @@ class DiscordGSM():
             embed = discord.Embed(title='ERROR', description=f'{FIELD_STATUS}: :warning: **Fail to query**', color=color)
             embed.add_field(name=f'{FIELD_ADDRESS}:{FIELD_PORT}', value=f'{server["addr"]}:{server["port"]}', inline=True)
         
-        embed.set_footer(text=f'DiscordGSM v{VERSION} | Game Server Monitor | Last update: ' + datetime.now().strftime('%a, %Y-%m-%d %I:%M:%S%p'), icon_url='https://github.com/DiscordGSM/DiscordGSM/raw/master/images/discordgsm.png')
+        embed.set_footer(text=f'DiscordGSM v{VERSION} | Game Server Monitor | Last update: ' + datetime.now().strftime('%a, %Y-%m-%d %I:%M:%S%p'), icon_url='https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/discordgsm.png')
         
         return embed
 
