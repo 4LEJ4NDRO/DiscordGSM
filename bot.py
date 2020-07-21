@@ -68,7 +68,7 @@ class DiscordGSM():
         # set username and avatar
         with open('images/tracker.png', 'rb') as file:
             try:
-                await bot.user.edit(username='TRACKER', avatar=file.read())
+                await bot.user.edit(username='DiscordGSM', avatar=file.read())
             except:
                 pass
 
