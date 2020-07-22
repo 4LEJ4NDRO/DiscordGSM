@@ -25,7 +25,7 @@ if servers_json_url and servers_json_url.strip():
         print('Fail to download servers.json on start up')
 
 # env values
-VERSION = '1.7.4'
+VERSION = '1.7.5'
 SETTINGS = Settings.get()
 DGSM_TOKEN = os.getenv('DGSM_TOKEN', SETTINGS['token'])
 DGSM_PREFIX = os.getenv("DGSM_PREFIX", SETTINGS.get('prefix', '!'))
@@ -66,7 +66,8 @@ class DiscordGSM():
 
     async def on_ready(self):
         # set username and avatar
-        with open('images/tracker.png', 'rb') as file:
+        icon_file_name = 'images/tracker' + ('DGSM_TOKEN' in os.environ and '-1024' or '') + '.png'
+        with open(icon_file_name, 'rb') as file:
             try:
                 await bot.user.edit(username='DiscordGSM', avatar=file.read())
             except:
@@ -147,7 +148,7 @@ class DiscordGSM():
             server_cache = ServerCache(self.server_list[self.current_display_server]['addr'], self.server_list[self.current_display_server]['port'])
             data = server_cache.get_data()
             if data and server_cache.get_status() == 'Online':
-                activity_text = f'{data["players"]}/{data["maxplayers"]} on {data["name"]}' if int(data["maxplayers"]) > 0 else '0 players'
+                activity_text = f'{data["players"]}/{data["maxplayers"]} - {data["name"]}' if int(data["maxplayers"]) > 0 else '0 players'
 
             self.current_display_server += 1
 
@@ -257,7 +258,7 @@ class DiscordGSM():
             embed = discord.Embed(title='ERROR', description=f'{FIELD_STATUS}: :warning: **Fail to query**', color=color)
             embed.add_field(name=f'{FIELD_ADDRESS}:{FIELD_PORT}', value=f'{server["addr"]}:{server["port"]}', inline=True)
         
-        embed.set_footer(text=f'Game Server Monitor | Last update: ' + datetime.now().strftime('%a, %Y-%m-%d %I:%M:%S%p'), icon_url='https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/tracker-512.png')
+        embed.set_footer(text=f'Game Server Monitor | Last update: ' + datetime.now().strftime('%a, %Y-%m-%d %I:%M:%S%p'), icon_url='https://github.com/4LEJ4NDRO/DiscordGSM/raw/master/images/tracker-256.png')
         
         return embed
 
